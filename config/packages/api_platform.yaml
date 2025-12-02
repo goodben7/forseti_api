@@ -28,3 +28,9 @@ api_platform:
             standard_put: true
             rfc_7807_compliant_errors: true
     use_symfony_listeners: true
+    graphql:
+        enabled: true
+        graphiql:
+            enabled: true
+        introspection:
+            enabled: true

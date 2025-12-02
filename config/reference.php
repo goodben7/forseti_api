@@ -1551,10 +1551,10 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         scopes?: list<scalar|null>,
  *     },
  *     graphql?: bool|array{
- *         enabled?: bool, // Default: false
+ *         enabled?: bool, // Default: true
  *         default_ide?: scalar|null, // Default: "graphiql"
  *         graphiql?: bool|array{
- *             enabled?: bool, // Default: false
+ *             enabled?: bool, // Default: true
  *         },
  *         introspection?: bool|array{
  *             enabled?: bool, // Default: true

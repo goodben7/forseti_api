@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "097eeaefaff14a3445e975e4c1d30b34",
+    "content-hash": "d126e06b3e41d3c6d1095c875164f262",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -243,6 +243,98 @@
             "description": "API Platform documentation controller.",
             "support": {
                 "source": "https://github.com/api-platform/documentation/tree/v4.2.8"
+            },
+            "time": "2025-11-30T12:55:42+00:00"
+        },
+        {
+            "name": "api-platform/graphql",
+            "version": "v4.2.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/api-platform/graphql.git",
+                "reference": "5c1df67c0880dd28b7683c5dcb89bfeed1841e5f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/api-platform/graphql/zipball/5c1df67c0880dd28b7683c5dcb89bfeed1841e5f",
+                "reference": "5c1df67c0880dd28b7683c5dcb89bfeed1841e5f",
+                "shasum": ""
+            },
+            "require": {
+                "api-platform/metadata": "^4.2",
+                "api-platform/serializer": "^4.2.4",
+                "api-platform/state": "^4.2.4",
+                "php": ">=8.2",
+                "symfony/property-info": "^7.1 || ^8.0",
+                "symfony/serializer": "^6.4 || ^7.1 || ^8.0",
+                "symfony/type-info": "^7.3 || ^8.0",
+                "webonyx/graphql-php": "^15.0",
+                "willdurand/negotiation": "^3.1"
+            },
+            "conflict": {
+                "doctrine/inflector": "<2.0",
+                "symfony/http-client": "<6.4"
+            },
+            "require-dev": {
+                "api-platform/validator": "^4.2.4",
+                "phpspec/prophecy-phpunit": "^2.2",
+                "phpunit/phpunit": "11.5.x-dev",
+                "symfony/mercure-bundle": "*",
+                "symfony/routing": "^6.4 || ^7.0 || ^8.0",
+                "twig/twig": "^1.42.3 || ^2.12 || ^3.0"
+            },
+            "suggest": {
+                "api-platform/doctrine-odm": "To support doctrine ODM state options.",
+                "api-platform/doctrine-orm": "To support doctrine ORM state options.",
+                "api-platform/validator": "To support validation."
+            },
+            "type": "library",
+            "extra": {
+                "thanks": {
+                    "url": "https://github.com/api-platform/api-platform",
+                    "name": "api-platform/api-platform"
+                },
+                "symfony": {
+                    "require": "^6.4 || ^7.0 || ^8.0"
+                },
+                "branch-alias": {
+                    "dev-3.4": "3.4.x-dev",
+                    "dev-4.1": "4.1.x-dev",
+                    "dev-4.2": "4.2.x-dev",
+                    "dev-main": "4.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ApiPlatform\\GraphQl\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kévin Dunglas",
+                    "email": "kevin@dunglas.fr",
+                    "homepage": "https://dunglas.fr"
+                },
+                {
+                    "name": "API Platform Community",
+                    "homepage": "https://api-platform.com/community/contributors"
+                }
+            ],
+            "description": "Build GraphQL API endpoints",
+            "homepage": "https://api-platform.com",
+            "keywords": [
+                "api",
+                "graphql"
+            ],
+            "support": {
+                "source": "https://github.com/api-platform/graphql/tree/v4.2.8"
             },
             "time": "2025-11-30T12:55:42+00:00"
         },
@@ -8996,6 +9088,81 @@
             "time": "2025-10-29T15:56:20+00:00"
         },
         {
+            "name": "webonyx/graphql-php",
+            "version": "v15.26.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webonyx/graphql-php.git",
+                "reference": "b4a36b2756148661946afb84543497bf330a1708"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webonyx/graphql-php/zipball/b4a36b2756148661946afb84543497bf330a1708",
+                "reference": "b4a36b2756148661946afb84543497bf330a1708",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": "^7.4 || ^8"
+            },
+            "require-dev": {
+                "amphp/amp": "^2.6",
+                "amphp/http-server": "^2.1",
+                "dms/phpunit-arraysubset-asserts": "dev-master",
+                "ergebnis/composer-normalize": "^2.28",
+                "friendsofphp/php-cs-fixer": "3.89.2",
+                "mll-lab/php-cs-fixer-config": "5.11.0",
+                "nyholm/psr7": "^1.5",
+                "phpbench/phpbench": "^1.2",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan": "2.1.32",
+                "phpstan/phpstan-phpunit": "2.0.8",
+                "phpstan/phpstan-strict-rules": "2.0.7",
+                "phpunit/phpunit": "^9.5 || ^10.5.21 || ^11",
+                "psr/http-message": "^1 || ^2",
+                "react/http": "^1.6",
+                "react/promise": "^2.0 || ^3.0",
+                "rector/rector": "^2.0",
+                "symfony/polyfill-php81": "^1.23",
+                "symfony/var-exporter": "^5 || ^6 || ^7",
+                "thecodingmachine/safe": "^1.3 || ^2 || ^3",
+                "ticketswap/phpstan-error-formatter": "1.2.3"
+            },
+            "suggest": {
+                "amphp/http-server": "To leverage async resolving with webserver on AMPHP platform",
+                "psr/http-message": "To use standard GraphQL server",
+                "react/promise": "To leverage async resolving on React PHP platform"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GraphQL\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A PHP port of GraphQL reference implementation",
+            "homepage": "https://github.com/webonyx/graphql-php",
+            "keywords": [
+                "api",
+                "graphql"
+            ],
+            "support": {
+                "issues": "https://github.com/webonyx/graphql-php/issues",
+                "source": "https://github.com/webonyx/graphql-php/tree/v15.26.0"
+            },
+            "funding": [
+                {
+                    "url": "https://opencollective.com/webonyx-graphql-php",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2025-11-20T10:06:36+00:00"
+        },
+        {
             "name": "willdurand/negotiation",
             "version": "3.1.0",
             "source": {
@@ -11199,7 +11366,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
@@ -11207,6 +11374,6 @@
         "ext-ctype": "*",
         "ext-iconv": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
