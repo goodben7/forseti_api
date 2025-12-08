@@ -13,6 +13,8 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ProfileRepository;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\GraphQl\Query;
+use ApiPlatform\Metadata\GraphQl\Mutation;
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Doctrine\Orm\State\ItemProvider;
@@ -45,6 +47,30 @@ use ApiPlatform\Doctrine\Common\State\PersistProcessor;
         new Patch(
             security: 'is_granted("ROLE_PROFILE_UPDATE")',
             denormalizationContext: ['groups' => 'profile:patch',],
+            processor: PersistProcessor::class,
+        ),
+    ],
+    graphQlOperations: [
+        new Query(
+            name: 'item_query',
+            security: 'is_granted("ROLE_PROFILE_DETAILS")',
+            provider: ItemProvider::class,
+        ),
+        new Query(
+            name: 'collection_query',
+            security: 'is_granted("ROLE_PROFILE_LIST")',
+            provider: CollectionProvider::class,
+        ),
+        new Mutation(
+            name: 'create',
+            security: 'is_granted("ROLE_PROFILE_CREATE")',
+            denormalizationContext: ['groups' => 'profile:post'],
+            processor: PersistProcessor::class,
+        ),
+        new Mutation(
+            name: 'update',
+            security: 'is_granted("ROLE_PROFILE_UPDATE")',
+            denormalizationContext: ['groups' => 'profile:patch'],
             processor: PersistProcessor::class,
         ),
     ]
