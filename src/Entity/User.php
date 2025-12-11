@@ -24,6 +24,9 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use App\State\ToggleLockUserProcessor;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\GraphQl\Query;
+use ApiPlatform\Metadata\GraphQl\QueryCollection;
+use ApiPlatform\Metadata\GraphQl\Mutation;
 use App\State\ChangeUserPasswordProcessor;
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
@@ -87,6 +90,37 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
             processor: SetProfileProcessor::class,
             status: 200,
         )
+    ],
+    graphQlOperations: [
+        new Query(
+            name: 'item_query',
+            security: 'is_granted("ROLE_USER_DETAILS")',
+            provider: ItemProvider::class,
+        ),
+        new QueryCollection(
+            description: 'Liste des utilisateurs',
+            security: 'is_granted("ROLE_USER_LIST")',
+            provider: CollectionProvider::class,
+            paginationType: 'cursor',
+        ),
+        new Mutation(
+            name: 'create',
+            security: 'is_granted("ROLE_USER_CREATE")',
+            input: CreateUserDto::class,
+            processor: CreateUserProcessor::class,
+        ),
+        new Mutation(
+            name: 'update',
+            security: 'is_granted("ROLE_USER_EDIT")',
+            input: UpdateUserDto::class,
+            processor: UpdateUserProcessor::class,
+        ),
+        new Mutation(
+            name: 'changePassword',
+            security: 'is_granted("ROLE_USER_CHANGE_PWD", object)',
+            input: ChangePasswordDto::class,
+            processor: ChangeUserPasswordProcessor::class,
+        ),
     ]
 )]
 #[ApiFilter(SearchFilter::class, properties: [

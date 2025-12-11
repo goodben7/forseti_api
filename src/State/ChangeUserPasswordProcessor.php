@@ -16,9 +16,24 @@ class ChangeUserPasswordProcessor implements ProcessorInterface
     /**
      * @param \App\Dto\ChangePasswordDto $data 
      */
-    public function process($data, Operation $operation, $uriVariables = [], $context = [])
+    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = [])
     {
-        return $this->manager->changePassword($uriVariables['id'], $data->actualPassword, $data->newPassword);
+        $id = $uriVariables['id'] ?? ($context['args']['input']['id'] ?? null);
+
+        if ($id === null) {
+            throw new \InvalidArgumentException('Missing user identifier');
+        }
+
+        if (\is_string($id) && str_starts_with($id, '/')) {
+            $id = basename($id);
+        } elseif (\is_string($id)) {
+            $decoded = base64_decode($id, true);
+            if ($decoded && str_contains($decoded, '/api/users/')) {
+                $id = basename($decoded);
+            }
+        }
+
+        return $this->manager->changePassword($id, $data->actualPassword, $data->newPassword);
     }
 
 }

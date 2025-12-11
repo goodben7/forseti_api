@@ -25,6 +25,21 @@ class UpdateUserProcessor implements ProcessorInterface
             $data->displayName
         );
 
-        return $this->manager->updateFrom($uriVariables['id'], $model); 
+        $id = $uriVariables['id'] ?? ($context['args']['input']['id'] ?? null);
+
+        if ($id === null) {
+            throw new \InvalidArgumentException('Missing user identifier');
+        }
+
+        if (\is_string($id) && str_starts_with($id, '/')) {
+            $id = basename($id);
+        } elseif (\is_string($id)) {
+            $decoded = base64_decode($id, true);
+            if ($decoded && str_contains($decoded, '/api/users/')) {
+                $id = basename($decoded);
+            }
+        }
+
+        return $this->manager->updateFrom($id, $model);
     }
 }
