@@ -121,6 +121,24 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
             input: ChangePasswordDto::class,
             processor: ChangeUserPasswordProcessor::class,
         ),
+        new Mutation(
+            name: 'toggleLock',
+            security: 'is_granted("ROLE_USER_LOCK")',
+            deserialize: false,
+            args: [
+                'id' => ['type' => 'ID!']
+            ],
+            processor: ToggleLockUserProcessor::class,
+        ),
+        new Mutation(
+            name: 'delete',
+            security: 'is_granted("ROLE_USER_DELETE")',
+            deserialize: false,
+            args: [
+                'id' => ['type' => 'ID!']
+            ],
+            processor: DeleteUserProcessor::class,
+        ),
     ]
 )]
 #[ApiFilter(SearchFilter::class, properties: [
