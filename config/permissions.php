@@ -20,4 +20,7 @@ return static function (): iterable {
     yield Permission::new('ROLE_PROFILE_UPDATE', "Modifier un profil utilisateur");
     yield Permission::new('ROLE_PROFILE_DETAILS', "Consulter les détails d'un profil utilisateur");
 
+    yield Permission::new('ROLE_ACTIVITY_LIST', "Consulter la liste des activités");
+    yield Permission::new('ROLE_ACTIVITY_VIEW', "Consulter les détails d'une activité");
+
 };

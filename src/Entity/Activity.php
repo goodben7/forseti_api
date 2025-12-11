@@ -8,9 +8,13 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ActivityRepository;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\GraphQl\Query;
+use ApiPlatform\Metadata\GraphQl\QueryCollection;
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Doctrine\Orm\State\ItemProvider;
+use ApiPlatform\Doctrine\Orm\State\CollectionProvider;
 use Symfony\Component\Serializer\Attribute\Groups;
 
 
@@ -26,6 +30,19 @@ use Symfony\Component\Serializer\Attribute\Groups;
         )
     ],
     normalizationContext: ['groups' => ['activity:view']],
+    graphQlOperations: [
+        new Query(
+            name: 'item_query',
+            security: 'is_granted("ROLE_ACTIVITY_VIEW")',
+            provider: ItemProvider::class,
+        ),
+        new QueryCollection(
+            description: 'Liste des activités',
+            security: 'is_granted("ROLE_ACTIVITY_LIST")',
+            provider: CollectionProvider::class,
+            paginationType: 'cursor',
+        ),
+    ]
 )]
 #[ApiFilter(SearchFilter::class, properties: [
     'id' => 'exact',

@@ -14,6 +14,7 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ProfileRepository;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\GraphQl\Query;
+use ApiPlatform\Metadata\GraphQl\QueryCollection;
 use ApiPlatform\Metadata\GraphQl\Mutation;
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
@@ -56,10 +57,12 @@ use ApiPlatform\Doctrine\Common\State\PersistProcessor;
             security: 'is_granted("ROLE_PROFILE_DETAILS")',
             provider: ItemProvider::class,
         ),
-        new Query(
-            name: 'collection_query',
+        new QueryCollection(
+            description: 'Liste des profiles',
             security: 'is_granted("ROLE_PROFILE_LIST")',
             provider: CollectionProvider::class,
+            paginationType: 'page',
+            paginationClientItemsPerPage: true,
         ),
         new Mutation(
             name: 'create',
