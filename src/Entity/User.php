@@ -13,8 +13,10 @@ use App\Dto\SetUserProfileDto;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Delete;
 use Doctrine\ORM\Mapping as ORM;
+use App\Model\RessourceInterface;
 use App\Model\UserProxyIntertace;
 use App\Manager\PermissionManager;
+use App\Provider\UserInfoProvider;
 use App\Repository\UserRepository;
 use App\State\CreateUserProcessor;
 use App\State\DeleteUserProcessor;
@@ -25,16 +27,15 @@ use ApiPlatform\Metadata\ApiResource;
 use App\State\ToggleLockUserProcessor;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\GraphQl\Query;
-use ApiPlatform\Metadata\GraphQl\QueryCollection;
 use ApiPlatform\Metadata\GraphQl\Mutation;
 use App\State\ChangeUserPasswordProcessor;
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Doctrine\Orm\State\ItemProvider;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\GraphQl\QueryCollection;
 use Symfony\Component\Serializer\Attribute\Groups;
 use ApiPlatform\Doctrine\Orm\State\CollectionProvider;
-use App\Model\RessourceInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -140,6 +141,12 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
             processor: DeleteUserProcessor::class,
         ),
     ]
+)]
+#[Get(
+    uriTemplate: 'users/about',
+    security: 'is_granted("ROLE_USER")',
+    normalizationContext: ['groups' => 'user:get'],
+    provider: UserInfoProvider::class,
 )]
 #[ApiFilter(SearchFilter::class, properties: [
     'id' => 'exact',

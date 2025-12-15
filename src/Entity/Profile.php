@@ -99,28 +99,28 @@ class Profile implements RessourceInterface
     private ?string $id = null;
 
     #[ORM\Column(name: 'PR_LABEL', length: 120)]
-    #[Groups(['profile:get', 'profile:post', 'profile:patch'])]
+    #[Groups(['profile:get', 'profile:post', 'profile:patch', 'user:get'])]
     private ?string $label = null;
 
     #[ORM\Column(name: 'PR_PERSON_TYPE', length: 6)]
     #[Assert\Choice(callback: [User::class, 'getPersonTypesAsList'])]
-    #[Groups(['profile:get', 'profile:post', 'profile:patch'])]
+    #[Groups(['profile:get', 'profile:post', 'profile:patch', 'user:get'])]
     private ?string $personType = null;
 
     #[ORM\Column(name: 'PR_PERMISSION', type: Types::SIMPLE_ARRAY)]
-    #[Groups(['profile:get', 'profile:post', 'profile:patch'])]
+    #[Groups(['profile:get', 'profile:post', 'profile:patch', 'user:get'])]
     private array $permission = [];
 
     #[ORM\Column(name: 'PR_ACTIVE')]
-    #[Groups(['profile:get', 'profile:post', 'profile:patch'])]
+    #[Groups(['profile:get', 'profile:post', 'profile:patch', 'user:get'])]
     private ?bool $active = null;
 
     #[ORM\Column(name: 'PR_CREATED_AT')]
-    #[Groups(['profile:get'])]
+    #[Groups(['profile:get', 'user:get'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(name: 'PR_UPDATED_AT', nullable: true)]
-    #[Groups(['profile:get'])]
+    #[Groups(['profile:get', 'user:get'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?string
@@ -130,7 +130,7 @@ class Profile implements RessourceInterface
 
     public function getLabel(): ?string
     {
-        return $this->label;
+        return $this->label ?? '';
     }
 
     public function setLabel(string $label): static
