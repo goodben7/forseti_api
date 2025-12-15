@@ -104,6 +104,14 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
             provider: CollectionProvider::class,
             paginationType: 'cursor',
         ),
+        new Query(
+            name: 'byEmail',
+            security: 'is_granted("ROLE_USER_DETAILS")',
+            provider: \App\Provider\UserByEmailProvider::class,
+            args: [
+                'email' => ['type' => 'String!']
+            ]
+        ),
         new Mutation(
             name: 'create',
             security: 'is_granted("ROLE_USER_CREATE")',
